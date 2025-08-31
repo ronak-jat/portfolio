@@ -3,15 +3,14 @@
 :root {
     /* Colors - Changed to Purple/Black Theme
     ____________________*/
-    --color-primary: #b25ff6ea; /* Blue Violet (Purple) */
-    --color-primary-dark: #6A1BA6; /* Darker Purple */
-    --color-bg-primary: #121212; /* Deep Black/Gray */
-    --color-bg-secondary: #1E1E1E; /* Darker background for sections/cards */
+    --color-primary: #b25ff6ea;
+    --color-primary-dark: #6A1BA6; 
+    --color-bg-primary: #121212; 
+    --color-bg-secondary: #1E1E1E; 
     --color-bg-footer: #0A0A0A;
     --color-white: #ffffff;
-    --color-text: #B0B0B0; /* Light gray for body text */
-    --color-border: #333333; /* Darker border */
-
+    --color-text: #B0B0B0; 
+    --color-border: #333333;
     /* Font & Typography
     ___________________*/
     --ff-body: "Space Grotesk", sans-serif;
@@ -438,17 +437,26 @@ body {
     display: flex;
     justify-content: center;
     gap: 2rem;
-    flex-wrap: nowrap; /* Changed to wrap for better responsiveness */
+    flex-wrap: wrap;
+     max-width: calc(4 * 200px + 3 * 2rem); /* 4 boxes + 3 gaps */
+    margin: 0 auto;
+}
+
+@media screen and (min-width: 900px) {
+    .skills__wrapper {
+        flex-wrap: nowrap;        
+        max-width: 100%;
+    }
 }
 
 .skills__content {
     background-color: var(--color-bg-secondary);
     box-shadow: var(--box-shadow);
     padding: 3rem;
-    flex: 1 1 200px; /* Adjust min width to 200px */
-    max-width: 250px;
-    border-radius: 10px; /* Added slight border radius */
-    border: 1px solid var(--color-border); /* Subtle border */
+    flex: 1 1 200px; 
+    max-width: 200px;
+    border-radius: 10px; 
+    border: 1px solid var(--color-border); 
     transition: var(--transition);
 }
 
@@ -793,4 +801,5 @@ body {
     .project__wrapper {
         grid-template-columns: repeat(3, 1fr);
     }
+
 }

@@ -116,24 +116,34 @@ yearSpan.innerHTML = yearSpan.innerHTML.replace('{currentYear}', currentYear);
 
 document.addEventListener("DOMContentLoaded", function () {
     const contactForm = document.getElementById("contact-form");
+    const status = document.getElementById("form-status"); // keep your <p> element for feedback
 
-    contactForm.addEventListener("submit", function (e) {
-        e.preventDefault(); 
-        
-        // This is a placeholder as the actual EmailJS keys are not provided
-        emailjs.sendForm(
-            "service_brfg235",   
-            "template_yex8tsi", 
-            "#contact-form",     
-            "1of3vcX3npX90Ib0s" 
-        )
+    contactForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
 
-        .then(function(response) {
-            alert("✅ Message sent successfully!");
-            contactForm.reset(); // Clear the form
-        }, function(error) {
-            alert("❌ Failed to send message. Please try again later.");
-            console.error("EmailJS Error:", error);
-        });
+        const data = new FormData(contactForm);
+
+        try {
+            const response = await fetch("https://formspree.io/f/mjkonqnd", { 
+                method: "POST",
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                alert("✅ Message sent successfully!");
+                contactForm.reset(); // clear the form
+            } else {
+                const errorData = await response.json();
+                alert("❌ Failed to send message.");
+                console.error("Formspree error:", errorData);
+            }
+        } catch (err) {
+            alert("❌ Failed to send message.");
+            console.error("Formspree error:", err);
+        }
+
     });
 });
